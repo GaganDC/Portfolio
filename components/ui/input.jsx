@@ -1,8 +1,7 @@
 import * as React from "react"
+import { cn } from "../../lib/utils"
 
-import { cn } from "/React-App/merged_my_portfolio/lib/utils"
-
-const Input = React.forwardRef(function Input({ className, type, ...props }, ref) {
+const Input = React.forwardRef(function Input({ className, type = "text", value, defaultValue, ...props }, ref) {
   return (
     <input
       type={type}
@@ -11,6 +10,8 @@ const Input = React.forwardRef(function Input({ className, type, ...props }, ref
         className
       )}
       ref={ref}
+      value={value ?? ""}
+      defaultValue={defaultValue}
       {...props}
     />
   )

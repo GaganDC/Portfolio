@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb"
-import clientPromise from "/React-App/merged_my_portfolio/lib/mongodb"
+import clientPromise from "../../../lib/mongodb"
 
 // GET - Fetch all projects
 export async function GET() {

@@ -106,7 +106,7 @@ export default function HeroSection({ isEditMode }) {
                       <div className="relative w-48 h-48 mx-auto">
                         <Image
                           src={editData.imageUrl || "/placeholder.svg"}
-                          alt="Profile"
+                          alt={editData.name || "Profile image"}
                           fill
                           className="rounded-full object-cover"
                         />
@@ -165,7 +165,7 @@ export default function HeroSection({ isEditMode }) {
                   <div className="relative w-80 h-80 md:w-96 md:h-96">
                     <Image
                       src={heroData.imageUrl || "/placeholder.svg"}
-                      alt={heroData.name}
+                      alt={heroData.name || "Profile image"}
                       fill
                       className="rounded-full object-cover shadow-2xl"
                       priority

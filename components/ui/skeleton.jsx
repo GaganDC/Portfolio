@@ -1,6 +1,6 @@
 
 
-import { cn } from "/React-App/merged_my_portfolio/lib/utils" 
+import { cn } from "../../lib/utils"
 function Skeleton({
   className,
   ...props

@@ -8,7 +8,9 @@ export default function TypewriterEffect({ words, className = "" }) {
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
-    const currentWord = words[currentWordIndex]
+    if (!words || words.length === 0) return // Guard clause for empty words array
+
+    const currentWord = words[currentWordIndex] || ""
     let typingSpeed = isDeleting ? 50 : 120
 
     const timeout = setTimeout(() => {

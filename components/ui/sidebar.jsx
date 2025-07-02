@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { cn } from "/React-App/merged_my_portfolio/lib/utils"
+import { cn } from "../../lib/utils"
 
 const SidebarMenuButton = React.forwardRef(
   (

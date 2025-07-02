@@ -3,7 +3,7 @@
 import React, { createContext, useContext, forwardRef } from "react"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 
-import { cn } from "/React-App/merged_my_portfolio/lib/utils"
+import { cn } from "../../lib/utils"
 import { toggleVariants } from "@/components/ui/toggle"
 
 // Provide default context values
