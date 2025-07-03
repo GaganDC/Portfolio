@@ -7,6 +7,7 @@ import AboutSection from "../components/about-section"
 import ProjectsSection from "../components/projects-section"
 import ResumeSection from "../components/resume-section"
 import ContactSection from "../components/contact-section"
+
 import FloatingDotsBackground from "../components/floating-dots-background"
 import Footer from "../components/footer"
 

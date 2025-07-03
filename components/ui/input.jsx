@@ -1,7 +1,10 @@
 import * as React from "react"
 import { cn } from "../../lib/utils"
 
-const Input = React.forwardRef(function Input({ className, type = "text", value, defaultValue, ...props }, ref) {
+const Input = React.forwardRef(function Input(
+  { className, type = "text", value, defaultValue, onChange, ...props },
+  ref
+) {
   return (
     <input
       type={type}
@@ -10,8 +13,8 @@ const Input = React.forwardRef(function Input({ className, type = "text", value,
         className
       )}
       ref={ref}
-      value={value ?? ""}
-      defaultValue={defaultValue}
+      // 👇 This avoids the "read-only" warning
+      {...(onChange ? { value, onChange } : { defaultValue })}
       {...props}
     />
   )

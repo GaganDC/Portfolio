@@ -21,12 +21,10 @@ export default function AboutSection({ isEditMode }) {
       "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "Figma", "Tailwind CSS", "GraphQL"
     ],
     socialLinks: {
-      github: "https://github.com/johndoe",
-      linkedin: "https://linkedin.com/in/johndoe",
-      twitter: "https://twitter.com/johndoe",
-      instagram: "https://instagram.com/johndoe",
-      email: "john@example.com",
-      website: "https://johndoe.dev",
+      github: "https://github.com/GaganDc",
+      linkedin: "https://www.linkedin.com/in/gagandeep-chinthakunta-3a7190326/",
+      instagram: "https://www.instagram.com/gagan_stark_46?igsh=aG9qejNkcmNwMGpw&utm_source=qr",
+      email: "gagandeep.c046@gmail.com",
     },
   })
 
@@ -48,7 +46,6 @@ export default function AboutSection({ isEditMode }) {
   const socialIcons = {
     github: Github,
     linkedin: Linkedin,
-    twitter: Twitter,
     instagram: Instagram,
     email: Mail,
     website: Globe,

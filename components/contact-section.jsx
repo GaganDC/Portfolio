@@ -6,104 +6,85 @@ import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Textarea } from "../components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
-import { useToast } from "../hooks/use-toast"
 
 export default function ContactSection() {
-  const { toast } = useToast()
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
 
+    const form = e.target
+    const formData = {
+      access_key: "1f9b6369-b1d9-4b01-80ce-662d54bf6522", // ✅ Replace with your actual Web3Forms access key
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value,
+    }
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Replace this key
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       })
 
-      if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Your message has been sent successfully. I'll get back to you soon!",
-        })
-        setFormData({ name: "", email: "", subject: "", message: "" })
+      const data = await response.json()
+
+      if (data.success) {
+        alert("✅ Message sent successfully!")
+        form.reset()
       } else {
-        throw new Error("Failed to send message")
+        alert("❌ Submission failed: " + (data.message || "Unknown error"))
+        console.error("Web3Forms error:", data)
       }
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again later.",
-        variant: "destructive",
-      })
+      alert("❌ Network error. Please try again later.")
+      console.error(error)
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
   return (
     <section id="contact" className="py-20">
-      <div className="container mx-auto px-4 sm-6 lg-8">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl md-4xl font-bold font-poppins mb-4 gradient-text">Get In Touch</h2>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4 gradient-text">Get In Touch</h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you!
+            Have a project in mind or want to collaborate? I’d love to hear from you!
           </p>
         </div>
+
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-8 animate-slide-in-left">
+          <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold font-poppins mb-6">Let's Connect</h3>
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 I'm always open to discussing new opportunities, creative projects, or potential collaborations.
               </p>
             </div>
-
             <div className="space-y-6">
-              <ContactInfo icon={<Mail />} label="Email" value="Gagandeep.pros@example.com" />
-              <ContactInfo icon={<Phone />} label="Phone" value="9121891420" />
-              <ContactInfo icon={<MapPin />} label="Location" value="Hyderabad,Malla Reddy University" />
+              <ContactInfo icon={<Mail />} label="Email" value="your.email@example.com" />
+              <ContactInfo icon={<Phone />} label="Phone" value="+91 9123456789" />
+              <ContactInfo icon={<MapPin />} label="Location" value="Hyderabad, India" />
             </div>
           </div>
 
-          <Card className="animate-slide-in-right">
+          <Card>
             <CardHeader>
               <CardTitle className="font-poppins">Send Me a Message</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <InputGroup
                     label="Name *"
                     id="name"
                     name="name"
                     type="text"
-                    value={formData.name}
-                    onChange={handleChange}
                     placeholder="Your full name"
                   />
                   <InputGroup
@@ -111,8 +92,6 @@ export default function ContactSection() {
                     id="email"
                     name="email"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -122,8 +101,6 @@ export default function ContactSection() {
                   id="subject"
                   name="subject"
                   type="text"
-                  value={formData.subject}
-                  onChange={handleChange}
                   placeholder="What's this about?"
                 />
 
@@ -135,8 +112,6 @@ export default function ContactSection() {
                     id="message"
                     name="message"
                     required
-                    value={formData.message}
-                    onChange={handleChange}
                     placeholder="Tell me about your project or just say hello!"
                     rows={6}
                   />
@@ -182,7 +157,7 @@ function ContactInfo({ icon, label, value }) {
   )
 }
 
-function InputGroup({ label, id, name, type, value, onChange, placeholder }) {
+function InputGroup({ label, id, name, type, placeholder }) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium mb-2">
@@ -193,8 +168,6 @@ function InputGroup({ label, id, name, type, value, onChange, placeholder }) {
         name={name}
         type={type}
         required
-        value={value}
-        onChange={onChange}
         placeholder={placeholder}
       />
     </div>
