@@ -16,43 +16,94 @@ export default function HeroSection({ isEditMode }) {
   const [heroData, setHeroData] = useState(null)
   const [editData, setEditData] = useState(null)
 
-  useEffect(() => {
-    const fetchProfile = async () => {
+ useEffect(() => {
+  const fetchProfile = async () => {
+    try {
       const res = await fetch("/api/profile")
       const data = await res.json()
-      setHeroData(data)
-      setEditData(data)
+
+      // Remove _id from state to avoid MongoDB update error
+      const { _id, ...rest } = data
+
+      setHeroData(rest)
+      setEditData(rest)
+    } catch (err) {
+      toast({
+        title: "Failed to load profile",
+        description: "Check backend/server logs.",
+        variant: "destructive",
+      })
     }
-    fetchProfile()
-  }, [])
-
-  const handleSave = async () => {
-    await fetch("/api/profile", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(editData),
-    })
-
-    setHeroData(editData)
-
-    toast({
-      title: "Success",
-      description: "Hero section updated successfully!",
-    })
   }
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        setEditData({ ...editData, imageUrl: e.target.result })
+  fetchProfile()
+}, [])
+const handleSave = async () => {
+  console.log("Submitting this to MongoDB:", editData) // 👀 See if imageUrl is there
+
+  await fetch("/api/profile", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(editData),
+  })
+
+  setHeroData(editData)
+
+  toast({
+    title: "Success",
+    description: "Hero section updated successfully!",
+  })
+}
+
+
+
+
+
+
+
+  const handleImageUpload = async (e) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  const reader = new FileReader()
+  reader.onloadend = async () => {
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: reader.result }),
+      })
+
+      const data = await res.json()
+      if (data.url) {
+        setEditData((prev) => ({ ...prev, imageUrl: data.url }))
+        toast({
+          title: "Image Uploaded",
+          description: "Successfully uploaded to Cloudinary.",
+        })
+      } else {
+        throw new Error(data.error || "Upload failed")
       }
-      reader.readAsDataURL(file)
+    } catch (err) {
+      toast({
+        title: "Upload Error",
+        description: err.message,
+        variant: "destructive",
+      })
     }
   }
+  reader.readAsDataURL(file)
+}
 
-  if (!heroData) return null
+
+
+
+  if (!heroData) return (
+  <section className="min-h-screen flex items-center justify-center">
+    <p className="text-muted-foreground animate-pulse">Loading profile...</p>
+  </section>
+)
+
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 pb-10 relative">

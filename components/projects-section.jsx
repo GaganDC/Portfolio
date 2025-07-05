@@ -135,14 +135,65 @@ export default function ProjectsSection({ isEditMode }) {
     setter({ ...currentProject, technologies })
   }
 
-  const handleImageUpload = (e, setter, currentProject) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => setter({ ...currentProject, image: e.target.result })
-      reader.readAsDataURL(file)
+  const handleImageUpload = async (e) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  const reader = new FileReader()
+  reader.onloadend = async () => {
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: reader.result }), // base64 image
+      })
+
+      const data = await res.json()
+
+      if (data.url) {
+        // ✅ Set imageUrl in editData
+        setEditData((prev) => {
+          const updated = { ...prev, imageUrl: data.url }
+
+          // ✅ Immediately save it to MongoDB
+          fetch("/api/profile", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updated),
+          })
+          .then(() => {
+            toast({
+              title: "Success",
+              description: "Image uploaded and profile updated!",
+            })
+          })
+          .catch(() => {
+            toast({
+              title: "Error",
+              description: "Failed to save image to MongoDB",
+              variant: "destructive",
+            })
+          })
+
+          return updated
+        })
+      } else {
+        throw new Error(data.error || "Upload failed")
+      }
+    } catch (err) {
+      toast({
+        title: "Upload Error",
+        description: err.message,
+        variant: "destructive",
+      })
     }
   }
+
+  reader.readAsDataURL(file)
+}
+
+
+
 
   return (
     <section id="projects" className="py-20">

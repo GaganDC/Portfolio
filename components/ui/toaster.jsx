@@ -1,8 +1,14 @@
 "use client"
 
-import { useToast } from "/React-App/merged_my_portfolio/hooks/use-toast"
-import {  Toast,  ToastClose,  ToastDescription,  ToastProvider,  ToastTitle,  ToastViewport,} from "../ui/toast"; // or correct relative path
-
+import {
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+} from "../../components/ui/toast"
+import { useToast } from "../../hooks/use-toast"
 
 export function Toaster() {
   const { toasts } = useToast()
@@ -14,9 +20,7 @@ export function Toaster() {
           <Toast key={id} {...props}>
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
-              )}
+              {description && <ToastDescription>{description}</ToastDescription>}
             </div>
             {action}
             <ToastClose />

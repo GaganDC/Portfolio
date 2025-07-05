@@ -1,5 +1,7 @@
+// app/api/projects/route.js
 import { ObjectId } from "mongodb"
 import clientPromise from "../../../lib/mongodb"
+import { NextResponse } from "next/server"
 
 // GET - Fetch all projects
 export async function GET() {
@@ -7,9 +9,10 @@ export async function GET() {
     const client = await clientPromise
     const db = client.db("portfolio")
     const projects = await db.collection("projects").find().toArray()
-    return Response.json(projects)
+    return NextResponse.json(projects)
   } catch (err) {
-    return Response.json({ error: "Failed to fetch projects" }, { status: 500 })
+    console.error("GET /api/projects error:", err)
+    return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 })
   }
 }
 
@@ -20,22 +23,10 @@ export async function POST(req) {
     const client = await clientPromise
     const db = client.db("portfolio")
     const result = await db.collection("projects").insertOne(body)
-    return Response.json({ message: "Project added", id: result.insertedId })
+    return NextResponse.json({ message: "Project added", id: result.insertedId })
   } catch (err) {
-    return Response.json({ error: "Failed to add project" }, { status: 500 })
-  }
-}
-
-// DELETE - Delete a project by ID
-export async function DELETE(req) {
-  try {
-    const { id } = await req.json()
-    const client = await clientPromise
-    const db = client.db("portfolio")
-    const result = await db.collection("projects").deleteOne({ _id: new ObjectId(id) })
-    return Response.json({ message: "Deleted", id })
-  } catch (err) {
-    return Response.json({ error: "Failed to delete project" }, { status: 500 })
+    console.error("POST /api/projects error:", err)
+    return NextResponse.json({ error: "Failed to add project" }, { status: 500 })
   }
 }
 
@@ -43,14 +34,32 @@ export async function DELETE(req) {
 export async function PUT(req) {
   try {
     const { id, ...data } = await req.json()
+    if (data._id) delete data._id
+
     const client = await clientPromise
     const db = client.db("portfolio")
     const result = await db.collection("projects").updateOne(
       { _id: new ObjectId(id) },
       { $set: data }
     )
-    return Response.json({ message: "Updated", id })
+
+    return NextResponse.json({ message: "Project updated", result })
   } catch (err) {
-    return Response.json({ error: "Failed to update project" }, { status: 500 })
+    console.error("PUT /api/projects error:", err)
+    return NextResponse.json({ error: "Failed to update project" }, { status: 500 })
+  }
+}
+
+// DELETE - Delete a project
+export async function DELETE(req) {
+  try {
+    const { id } = await req.json()
+    const client = await clientPromise
+    const db = client.db("portfolio")
+    const result = await db.collection("projects").deleteOne({ _id: new ObjectId(id) })
+    return NextResponse.json({ message: "Project deleted", result })
+  } catch (err) {
+    console.error("DELETE /api/projects error:", err)
+    return NextResponse.json({ error: "Failed to delete project" }, { status: 500 })
   }
 }
