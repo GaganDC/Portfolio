@@ -12,22 +12,19 @@ export async function GET() {
 export async function PUT(req) {
   try {
     const body = await req.json()
-
-    // ✅ Remove _id if present (MongoDB won't allow modifying it)
-    if ('_id' in body) delete body._id
+    if (body._id) delete body._id
 
     const client = await clientPromise
     const db = client.db("portfolio")
 
-    await db.collection("profile").updateOne(
-      {}, // match the first document
+    const result = await db.collection("profile").updateOne(
+      {},
       { $set: body },
       { upsert: true }
     )
 
-    return NextResponse.json({ message: "Profile updated" })
+    return NextResponse.json({ message: "Profile updated", result })
   } catch (err) {
-    console.error("PUT /api/profile error:", err)
     return NextResponse.json({ error: "Failed to update profile" }, { status: 500 })
   }
 }
