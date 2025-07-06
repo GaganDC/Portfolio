@@ -141,19 +141,19 @@ export default function ResumeSection({ isEditMode }) {
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="text-center animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold text-primary mb-2">5+</div>
+                <div className="text-2xl font-bold text-primary mb-2">1+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </CardContent>
             </Card>
             <Card className="text-center animate-fade-in" style={{ animationDelay: "0.2s" }}>
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold text-primary mb-2">50+</div>
+                <div className="text-2xl font-bold text-primary mb-2">2+</div>
                 <div className="text-sm text-muted-foreground">Projects Completed</div>
               </CardContent>
             </Card>
             <Card className="text-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold text-primary mb-2">20+</div>
+                <div className="text-2xl font-bold text-primary mb-2">0+</div>
                 <div className="text-sm text-muted-foreground">Happy Clients</div>
               </CardContent>
             </Card>

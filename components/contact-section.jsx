@@ -67,7 +67,7 @@ export default function ContactSection() {
               </p>
             </div>
             <div className="space-y-6">
-              <ContactInfo icon={<Mail />} label="Email" value="your.email@example.com" />
+              <ContactInfo icon={<Mail />} label="Email" value="gagandeep.pros@example.com" />
               <ContactInfo icon={<Phone />} label="Phone" value="+91 9123456789" />
               <ContactInfo icon={<MapPin />} label="Location" value="Hyderabad, India" />
             </div>
