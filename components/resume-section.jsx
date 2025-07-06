@@ -30,7 +30,7 @@ export default function ResumeSection({ isEditMode }) {
         const data = await res.json();
         if (data.resumeUrl) {
           setResumeData({
-            fileName: extractFileName(data.resumeUrl),
+            fileName: data.resumeFileName || extractFileName(data.resumeUrl),
             fileUrl: data.resumeUrl,
             uploadDate: data.resumeUploadDate || new Date().toISOString(),
           });
@@ -84,6 +84,7 @@ export default function ResumeSection({ isEditMode }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           resumeUrl: data.url,
+          resumeFileName: file.name,
           resumeUploadDate: new Date().toISOString(),
         }),
       });
