@@ -111,7 +111,7 @@ export default function Navbar({ onEditMode, isEditMode, isAuthenticated, onLogo
 
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild className="block md:hidden">
-                  <Button variant="outline" size="icon">
+                  <Button variant="outline" size="icon" className="flex justify-center items-center">
                     <Menu className="h-4 w-4" />
                   </Button>
                 </SheetTrigger>
