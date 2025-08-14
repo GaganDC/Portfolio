@@ -135,15 +135,6 @@ export default function AuthDialog({ isOpen, onClose, onAuthenticated }) {
           </div>
         </form>
 
-        <div className="mt-4 p-3 bg-muted rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            <strong>Demo Credentials:</strong>
-            <br />
-            Username: <code className="font-mono">admin</code>
-            <br />
-            Password: <code className="font-mono">portfolio2024</code>
-          </p>
-        </div>
       </DialogContent>
     </Dialog>
   )
