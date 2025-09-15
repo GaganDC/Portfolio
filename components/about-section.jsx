@@ -18,7 +18,7 @@ export default function AboutSection({ isEditMode }) {
       "I am a passionate full-stack developer with over 2 years of experience in creating web applications...",
     skills: [
       "HTML","CSS","JavaScript", "React",  "Node.js", "Python",
-      "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "Figma","Tailwind CSS","FastAPI","Matplotlib","Scikit-learn", "Pandas","NumPy"
+      "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "Figma","Tailwind CSS","Machine Learning","FastAPI","Matplotlib","Scikit-learn", "Pandas","NumPy"
     ],
     socialLinks: {
       github: "https://github.com/GaganDc",
