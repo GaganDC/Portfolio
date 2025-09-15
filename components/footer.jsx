@@ -70,8 +70,8 @@ export default function Footer() {
 
         <div className="border-t mt-8 pt-8 text-center">
           <p className="text-muted-foreground flex items-center justify-center gap-2">
-            © {currentYear} Portfolio. Made with{" "}
-            <Heart className="h-4 w-4 text-red-500" /> using Next.js & Tailwind CSS
+            © {currentYear} Portfolio. 
+            <Heart className="h-4 w-4 text-red-500" />
           </p>
         </div>
       </div>

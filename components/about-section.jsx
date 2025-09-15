@@ -15,10 +15,10 @@ export default function AboutSection({ isEditMode }) {
   const [aboutData, setAboutData] = useState({
     title: "About Me",
     description:
-      "I am a passionate full-stack developer with over 5 years of experience in creating web applications...",
+      "I am a passionate full-stack developer with over 2 years of experience in creating web applications...",
     skills: [
-      "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Python",
-      "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "Figma", "Tailwind CSS", "GraphQL"
+      "HTML","CSS","JavaScript", "React",  "Node.js", "Python",
+      "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "Figma", "Tailwind CSS"
     ],
     socialLinks: {
       github: "https://github.com/GaganDc",
