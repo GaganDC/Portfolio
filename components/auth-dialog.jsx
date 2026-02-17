@@ -23,38 +23,42 @@ export default function AuthDialog({ isOpen, onClose, onAuthenticated }) {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const ADMIN_CREDENTIALS = {
-    username: "admin",
-    password: "portfolio2024",
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 500))
-
-    if (
-      credentials.username === ADMIN_CREDENTIALS.username &&
-      credentials.password === ADMIN_CREDENTIALS.password
-    ) {
-      toast({
-        title: "Success!",
-        description: "Authentication successful. Edit mode enabled.",
+    try {
+      const res = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
       })
 
-      if (typeof onAuthenticated === "function") {
-        onAuthenticated()
-      } else {
-        console.error("onAuthenticated is not a function")
-      }
+      const data = await res.json()
 
-      onClose()
-      setCredentials({ username: "", password: "" })
-    } else {
+      if (data.success) {
+        toast({
+          title: "Success!",
+          description: "Authentication successful. Edit mode enabled.",
+        })
+
+        if (typeof onAuthenticated === "function") {
+          onAuthenticated()
+        }
+
+        onClose()
+        setCredentials({ username: "", password: "" })
+      } else {
+        toast({
+          title: "Authentication Failed",
+          description: "Invalid username or password. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (err) {
       toast({
         title: "Authentication Failed",
-        description: "Invalid username or password. Please try again.",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       })
     }
