@@ -206,7 +206,7 @@ function RoleCard({ role, index, isVisible, onOpen }) {
           {/* Role Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
             <div className="flex items-center gap-3">
-              <div className={`h-11 w-11 rounded-xl ${role.iconBg} flex items-center justify-center shrink-0`}>
+              <div className={`h-11 w-11 rounded-xl ${role.iconBg} neu-raised-sm flex items-center justify-center shrink-0`}>
                 <RoleIcon className={`h-5 w-5 ${role.iconColor}`} />
               </div>
               <div>
@@ -267,7 +267,7 @@ function RoleDetailDialog({ role, isOpen, onClose }) {
       <DialogContent className="max-w-3xl w-[95vw] max-h-[90vh] overflow-y-auto p-5 md:p-8">
         <DialogHeader className="pb-4 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <div className={`h-11 w-11 rounded-xl ${role.iconBg} flex items-center justify-center shrink-0`}>
+            <div className={`h-11 w-11 rounded-xl ${role.iconBg} neu-raised-sm flex items-center justify-center shrink-0`}>
               <RoleIcon className={`h-5 w-5 ${role.iconColor}`} />
             </div>
             <div>
@@ -314,7 +314,7 @@ export default function ExperienceSection() {
   const [selectedRole, setSelectedRole] = useState(null)
 
   return (
-    <section id="experience" className="py-20 bg-muted/30 relative">
+    <section id="experience" className="py-20 bg-background relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-up">
           <div className="text-center mb-12">
