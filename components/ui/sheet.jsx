@@ -44,7 +44,7 @@ const SheetContent = React.forwardRef(
       <SheetPrimitive.Content
         ref={ref}
         className={cn(
-          "fixed z-50 bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out",
+          "fixed z-50 bg-background border-none p-6 neu-raised-lg transition-transform duration-300 ease-in-out",
           sheetVariants[side],
           className
         )}

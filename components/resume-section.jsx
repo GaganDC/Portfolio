@@ -117,7 +117,7 @@ export default function ResumeSection({ isEditMode }) {
   };
 
   return (
-    <section id="resume" className="py-20 bg-muted/30">
+    <section id="resume" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4 gradient-text">
@@ -140,7 +140,7 @@ export default function ResumeSection({ isEditMode }) {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-24 h-32 bg-muted rounded-lg mb-4">
+                <div className="inline-flex items-center justify-center w-24 h-32 bg-background rounded-2xl neu-inset mb-4">
                   <FileText className="h-12 w-12 text-muted-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">

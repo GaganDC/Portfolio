@@ -60,7 +60,7 @@ export default function Navbar({ onEditMode, isEditMode, isAuthenticated, onLogo
 
   return (
     <>
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b z-50">
+      <nav className="fixed top-0 w-full bg-background border-none z-50 neu-flat">
         <div className="container mx-auto px-4 sm-6 lg-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold font-poppins gradient-text">Portfolio</div>

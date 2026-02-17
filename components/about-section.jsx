@@ -52,7 +52,7 @@ export default function AboutSection({ isEditMode }) {
   }
 
   return (
-    <section id="about" className="py-20 bg-muted/30 relative">
+    <section id="about" className="py-20 bg-background relative">
       <div className="container mx-auto px-4 sm-6 lg-8 relative z-10">
         {isEditMode ? (
           <ScrollReveal animation="fade-up">

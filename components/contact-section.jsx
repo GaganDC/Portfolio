@@ -48,7 +48,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4 gradient-text">Get In Touch</h2>
@@ -146,7 +146,7 @@ export default function ContactSection() {
 function ContactInfo({ icon, label, value }) {
   return (
     <div className="flex items-center space-x-4">
-      <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg">
+      <div className="flex items-center justify-center w-12 h-12 bg-background rounded-xl neu-raised-sm">
         {icon}
       </div>
       <div>

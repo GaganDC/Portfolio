@@ -197,7 +197,7 @@ export default function ProjectsSection({ isEditMode }) {
   };
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-up">
           <div className="text-center mb-12">

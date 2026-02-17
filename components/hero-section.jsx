@@ -106,7 +106,7 @@ const handleSave = async () => {
 
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-20 pb-10 relative">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 pb-10 relative overflow-hidden">
       <div className="container mx-auto px-4 sm-6 lg-8 relative z-10">
         {isEditMode ? (
           <ScrollReveal animation="fade-up">
@@ -212,13 +212,12 @@ const handleSave = async () => {
             <ScrollReveal animation="fade-left" delay={400}>
               <div className="flex justify-center lg:justify-end">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="relative w-80 h-80 md:w-96 md:h-96">
+                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full neu-raised-lg p-2">
                     <Image
                       src={heroData.imageUrl || "/placeholder.svg"}
                       alt={heroData.name || "Profile image"}
                       fill
-                      className="rounded-full object-cover shadow-2xl"
+                      className="rounded-full object-cover"
                       priority
                     />
                   </div>
